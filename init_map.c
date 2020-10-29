@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 17:20:13 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/10/29 17:47:48 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/10/29 18:14:08 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,21 @@ static int			how_many_dot(char *arg)
 	return (count);
 }
 
-static int			**create_map(int h, int w)
+static void			*deleter(size_t i, int **res)
+{
+	i--;
+	while (i > 0)
+	{
+		free(res[i]);
+		res[i] = NULL;
+		i--;
+	}
+	free(res);
+	res = NULL;
+	return (NULL);
+}
+
+static int			**create_mem_map(int h, int w)
 {
 	int				**res;
 	int				i;
@@ -62,27 +76,18 @@ static int			**create_map(int h, int w)
 	while (i < h)
 	{
 		if (!(res[i] = (int *)malloc(sizeof(int) * w)))
-		{
-			i--;
-			while (i > 0)
-			{
-				free(res[i]);
-				res[i] = NULL;
-				i--;
-			}
-			free(res);
-			res = NULL;
-			return (NULL);
-		}
+			return(deleter(i, res));
+		i++;
 	}
-	
+	res[i] = NULL;
+	return (res);
 }
 
 void				init_map(t_map *map, char *arg)
 {
 	map->height = how_many_str(arg);
 	map->width = how_many_dot(arg);
-	map->map = create_map(map->height, map->width);
+	map->map = create_mem_map(map->height, map->width);
 
 	ft_printf("v etom file strok = %i\n", map->height);
 	ft_printf("v etom file tochek = %i\n", map->width);

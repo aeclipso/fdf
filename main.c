@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 10:47:46 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/10/29 17:20:34 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/10/29 18:24:04 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,29 @@ void		usage(void)
 	return ;
 }
 
+void			delete_map(t_map *map)
+{
+	size_t		i;
+	int			**del;
+
+	i = 0;
+	del = map->map;
+	while (i < map->height)
+	{
+		free(del[i]);
+		del[0] = NULL;
+		i++;
+	}
+	free(del);
+	del = NULL;
+}
+
 int				core(char *arg)
 {
 	t_map		map;
 
-	init_map(&map, arg);
+	init_map(&map, arg); //init struct for all 
+	delete_map(&map);
 	return (0);
 }
 
