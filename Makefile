@@ -6,13 +6,13 @@
 #    By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/24 13:57:10 by aeclipso          #+#    #+#              #
-#    Updated: 2020/10/29 17:22:16 by aeclipso         ###   ########.fr        #
+#    Updated: 2020/11/07 17:10:18 by aeclipso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fdf
 
-FLAGS=-Wall -Werror -Wextra  -O3 -ffast-math
+FLAGS=-Wall -Werror -Wextra  -O3 -ffast-math -g
 LIBRARIES = -lmlx  -lm -lft -L$(LIBFT_D) -L$(MINILIBX_D) -framework OpenGL -framework AppKit
 
 INCLUDES+= -I include
