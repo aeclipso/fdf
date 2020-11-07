@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+#include "fdf2.h"
 /*
 ◦ open, read, write, close
 ◦ malloc, free
@@ -48,11 +48,16 @@ void			delete_map(t_map *map)
 	del = NULL;
 }
 
+
+
+
+
 int				core(char *arg)
 {
 	t_map		map;
 
-	init_map(&map, arg); //init struct for all 
+	init_map(&map, arg); //init struct for all
+	render_manager(&map);
 	delete_map(&map);
 	return (0);
 }
