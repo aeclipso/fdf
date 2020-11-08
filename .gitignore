@@ -5,4 +5,4 @@ a.out.dSYM
 fdf.dSYM
 cmake-build-debug/
 .idea/
-
+*.zip
