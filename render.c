@@ -20,23 +20,49 @@ void init_image(t_fdf *fdf, int width, int height)
 	fdf->image.w = width;
 	fdf->image.h = height;
 	fdf->color = COL_RED;
+	fdf->image.line = STEP; //debug it
 	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d\n", fdf->image.w,
 			  fdf->image.h, fdf->image.w * fdf->image.h);
 }
 
-
-int render_manager(t_map *map)
+void		put_matrix_to_image(t_fdf *fdf)
 {
-	t_fdf fdf;
+	int x;
+	int y;
 
+	y = -1;
+	while (++y < fdf->map->height + 1)
+	{
+		x = -1;
+		while (++x < fdf->map->width + 1)
+		{
+			if (x != fdf->map->width)
+				fdf_put_line_to_image(fdf, fdf->image.L * x, fdf->image.L * y, (x + 1) * fdf->image.L, y * fdf->image.L);
+			if (y != fdf->map->height)
+				fdf_put_line_to_image(fdf, fdf->image.L * x, fdf->image.L * y, x * fdf->image.L, (y + 1) * fdf->image.L);
+		}
+	}
+	
+	// fdf_put_line_to_image(fdf, 192, 108, )
+}
+
+void		painter(t_fdf *fdf)
+{
+	init_image(fdf, fdf->w, fdf->h); // Инициализация fdf.image
+	fdf_put_background(fdf, COL_BLACK); // Заполнение цветом
+// 	int fdf_put_line_to_image(t_fdf *fdf, int x0, int y0, int x1, int y1)
+	put_matrix_to_image(fdf);
+	// fdf_put_line_to_image(fdf, 0, 0, fdf->w - 1 ,fdf->h - 1); //напечатать линию
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 20, 20);
+}
+
+int				render_manager(t_map *map)
+{
+	t_fdf		fdf;
+
+	fdf.map = map;
 	init_display(&fdf, "FDF");
-
-
-	init_image(&fdf, fdf.w, fdf.h); // Инициализация fdf.image
-	fdf_put_background(&fdf, COL_LIME); // Заполнение цветом
-//	fdf_put_pixel_to_image(&fdf, 1919, 1078, COL_WHITE); // Напечатать пиксель
-	fdf_put_line_to_image(&fdf, 0, 0, fdf.w - 1 ,fdf.h - 1); //напечатать линию
-	mlx_put_image_to_window(fdf.mlx, fdf.window, fdf.image.img, 0, 0);
+	painter(&fdf);
 	mlx_key_hook(fdf.window, hooks_manager, &fdf);
 	mlx_loop(fdf.mlx);
 	return (0);

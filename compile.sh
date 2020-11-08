@@ -1,1 +1,1 @@
-gcc -g main.c ./libft-printf/libft.a -I ./include -I ./libft-printf/include -o fdf
+gcc -Wall -Werror -Wextra  -O3 -ffast-math -I include -I libft-printf/include -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -Llibft-printf main.c init_map.c hooks.c render.c render_tools.c libft-printf/libft.a  -o fdf && ./fdf df_test.txt

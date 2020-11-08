@@ -6,12 +6,11 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 10:47:46 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/07 17:13:38 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/08 16:15:29 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "fdf2.h"
 /*
 ◦ open, read, write, close
 ◦ malloc, free
@@ -48,7 +47,7 @@ void			delete_map(t_map *map)
 	del = NULL;
 }
 
-
+// void			calculate_mapfield(t_map )
 
 
 
@@ -57,7 +56,9 @@ int				core(char *arg)
 	t_map		map;
 
 	init_map(&map, arg); //init struct for all
+	// calculate_mapfield(&map);
 	render_manager(&map);
+	
 	delete_map(&map);
 	return (0);
 }

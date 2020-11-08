@@ -6,18 +6,19 @@
 #    By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/24 13:57:10 by aeclipso          #+#    #+#              #
-#    Updated: 2020/11/07 17:10:18 by aeclipso         ###   ########.fr        #
+#    Updated: 2020/11/08 16:19:30 by aeclipso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fdf
 
-FLAGS=-Wall -Werror -Wextra  -O3 -ffast-math -g
-LIBRARIES = -lmlx  -lm -lft -L$(LIBFT_D) -L$(MINILIBX_D) -framework OpenGL -framework AppKit
+FLAGS=-Wall -Werror -Wextra  -O3 -ffast-math
+LIBRARIES = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -L$(LIBFT_D)
+
 
 INCLUDES+= -I include
 INCLUDES+= -I $(LIBFT_D)/include
-INCLUDES+= -I ./minilibx/
+# INCLUDES+= -I ./minilibx/
 
 LIBFT_D=libft-printf
 LIBFT = $(LIBFT_D)/libft.a 
@@ -26,22 +27,24 @@ MINILIBX_D=minilibx
 MINILIBX = $(MINILIBX_D)libmlx.a 
 
 SRC=main.c\
-	init_map.c
+	init_map.c\
+	hooks.c\
+	render.c\
+	render_tools.c
 
 OBJ=$(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MINILIBX)
-	# @gcc -g -o $@ $^ -L $(LIBFT_D) -lft
-	@gcc $(FLAGS) $(INCLUDES) -c $(SRC)
-	@gcc $(FLAGS) -g $(LIBRARIES) $(INCLUDES) -o $(NAME) $(OBJ)
+$(NAME): $(LIBFT)
+	@gcc $(FLAGS) $(INCLUDES) $(LIBRARIES) $(SRC) $(LIBFT) -o fdf
+	# @gcc $(FLAGS) -g $(LIBRARIES) $(INCLUDES) -o $(NAME) $(OBJ)
 
 libft.a :
 	@$(MAKE) --no-print-directory -C $(LIBFT_D) all
 
-$(MINILIBX):
-	@$(MAKE) -sC $(MINILIBX_D)
+# $(MINILIBX):
+# 	@$(MAKE) -sC $(MINILIBX_D)
 
 # $(OBJ): %.o: %.c
 # 		@gcc -g $(FLAGS) $(INCLUDES) -MD -o $@ -c $<

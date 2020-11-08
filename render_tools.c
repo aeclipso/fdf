@@ -26,8 +26,7 @@ int fdf_put_line_to_image(t_fdf *fdf, int x0, int y0, int x1, int y1)
 			y0 += sy;
 		}
 	}
-
-
+	return (0);
 }
 
 
