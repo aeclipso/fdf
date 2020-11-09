@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include <math.h>
 
 # define H height;
 # define W width;
@@ -36,6 +37,7 @@
 #define W_WIDTH		1920
 #define W_HEIGHT	1080
 #define STEP		50
+#define ZOOM		.2
 # define line L
 typedef struct	s_map
 {
@@ -61,7 +63,7 @@ typedef struct	s_fdf_image
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		line;
+	float 	line;
 }				t_image;
 
 
@@ -102,5 +104,8 @@ int hooks_manager(int keycode, t_fdf *fdf);
 // Math
 float	mod(float nbr);
 float	max(float a, float b);
-t_point point_init(float x, float y, float z);
+void	x_angle(float x, float *y, float *z, float angle);
+void	y_angle(float *x, float y, float *z, float angle);
+void	z_angle(float *x, float *y, float z, float angle);
+
 #endif 

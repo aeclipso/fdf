@@ -1,36 +1,43 @@
 #include "include/fdf.h"
 
-void		create_point(t_fdf *fdf, t_point *point, int x, int y)
+void create_point(t_fdf *fdf, t_point *point, int x, int y)
 {
+//	float x_rot = -3.834442f;
+//	float z_rot = -2.534443f;
+//	float y_rot = -2.614443f;
+	point->x = 0;
+	point->y = 0;
+	point->z = 0;
 
-//	point->z = fdf->matrix[y][x];
-//	point->z *= fdf->zoom_z;
-//	point->x -= (fdf->width * fdf->zoom) / 2;
-//	point->y -= (fdf->height * fdf->zoom) / 2;
-//	x_angle(point->x, &(point->y), &(point->z), fdf->angl->x_rot);
-//	y_angle(&(point->x), point->y, &(point->z), fdf->angl->y_rot);
-//	z_angle(&(point->x), &(point->y), point->z, fdf->angl->z_rot);
-	point->x = x;
-	point->y = y;
-//	point->x += 2;
-//	point->y += 2;
-	point->x = x * 10;
-	point->y = y * 10;
+	point->x = x * fdf->section;
+	point->y = y * fdf->section + 100;
+	if (y == 2 && x == 2)
+		point->y = + 20;
+//	point->z = fdf->map->map[y][x];
+//	point->z *= ZOOM; // zoom
+//	point->x -= (fdf->map->width * ZOOM) / 2;
+//	point->y -= (fdf->map->height * ZOOM) / 2;
+//	x_angle(point->x, &(point->y), &(point->z), x_rot);
+//	y_angle(&(point->x), point->y, &(point->z), y_rot);
+//	z_angle(&(point->x), &(point->y), point->z, z_rot);
+//	point->x += W_WIDTH / 3;
+//	point->y += W_HEIGHT / 3;
 
 }
 
-void		draw_line(t_fdf *fdf, int x, int y)
+void draw_line(t_fdf *fdf, int x, int y)
 {
-	t_point	p1;
-	t_point	p2;
+	t_point p1;
+	t_point p2;
 
 	create_point(fdf, &p1, x, y);
-	if (x < fdf->image.w - 1)
+//	ft_printf("[%d][%d]\n", x, y);
+	if (x < fdf->map->width - 1)
 	{
 		create_point(fdf, &p2, x + 1, y);
 		fdf_put_line_to_image(fdf, &p1, &p2);
 	}
-	if (y < fdf->image.h - 1)
+	if (y < fdf->map->height - 1)
 	{
 		create_point(fdf, &p2, x, y + 1);
 		fdf_put_line_to_image(fdf, &p1, &p2);
@@ -72,6 +79,7 @@ int fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
 
 	if (x > fdf->image.w || y > fdf->image.h || x < 0 || y < 0)
 	{
+		ft_printf("error on x = %d, y = %d\n", x, y);
 		ft_printf("error pixel");
 		exit(1);
 		return (0);

@@ -126,4 +126,5 @@ add_executable(share_fdf
         render.c
         hooks.c
         render_tools.c
-        math_tools.c)
+        math_tools.c
+        init_sect.c)
