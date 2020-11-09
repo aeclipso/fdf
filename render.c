@@ -6,8 +6,13 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->h = W_HEIGHT;
 	fdf->mlx = mlx_init();
 	fdf->window = mlx_new_window(fdf->mlx, fdf->w, fdf->h, title);
-	fdf->color = COL_YELLOW;
+	fdf->color1 = COL_RED;
+	fdf->color2 = COL_GREEN;
+	fdf->background_color = COL_BLACK;
 	fdf->section = init_sect(fdf);
+	fdf->x_r = -3.834442f;
+	fdf->x_r = -2.534443f;
+	fdf->x_r = -2.614443f;
 }
 
 
@@ -20,7 +25,6 @@ void init_image(t_fdf *fdf, int width, int height)
 										&fdf->image.endian);
 	fdf->image.w = width;
 	fdf->image.h = height;
-	fdf->color = COL_WHITE;
 	fdf->image.line = STEP; //debug it
 	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d\n", fdf->image.w,
 			  fdf->image.h, fdf->image.w * fdf->image.h);
@@ -42,12 +46,14 @@ void		draw(t_fdf *fdf)
 
 void painter(t_fdf *fdf)
 {
+	static int created;
+	if (created == 0)
+		created = 1;
+	else
+		mlx_destroy_image(fdf->mlx, fdf->image.img);
 	init_image(fdf, fdf->w, fdf->h); // Инициализация fdf.image
-//	fdf_put_background(fdf, COL_BLACK); // Заполнение цветом)
-//	draw_line(fdf, 2, 5);
 	draw(fdf);
-
-	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 192 , 108);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 0, 0);
 }
 
 int render_manager(t_map *map)
@@ -57,9 +63,6 @@ int render_manager(t_map *map)
 	fdf.map = map;
 	init_display(&fdf, "FDF");
 	painter(&fdf);
-//	init_image(&fdf, fdf.w, fdf.h);
-//	fdf_put_pixel_to_image(&fdf, 0 , 0, COL_RED);
-//	mlx_put_image_to_window(fdf.mlx, fdf.window, fdf.image.img, 0 , 0);
 	mlx_key_hook(fdf.window, hooks_manager, &fdf);
 	mlx_loop(fdf.mlx);
 	return (0);

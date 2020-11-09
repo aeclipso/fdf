@@ -2,26 +2,26 @@
 
 void create_point(t_fdf *fdf, t_point *point, int x, int y)
 {
-//	float x_rot = -3.834442f;
-//	float z_rot = -2.534443f;
-//	float y_rot = -2.614443f;
+	float x_rot = -3.834442f;
+	float z_rot = -2.534443f;
+	float y_rot = -2.614443f;
 	point->x = 0;
 	point->y = 0;
 	point->z = 0;
 
 	point->x = x * fdf->section;
-	point->y = y * fdf->section + 100;
-	if (y == 2 && x == 2)
-		point->y = + 20;
-//	point->z = fdf->map->map[y][x];
-//	point->z *= ZOOM; // zoom
-//	point->x -= (fdf->map->width * ZOOM) / 2;
-//	point->y -= (fdf->map->height * ZOOM) / 2;
-//	x_angle(point->x, &(point->y), &(point->z), x_rot);
-//	y_angle(&(point->x), point->y, &(point->z), y_rot);
-//	z_angle(&(point->x), &(point->y), point->z, z_rot);
-//	point->x += W_WIDTH / 3;
-//	point->y += W_HEIGHT / 3;
+	point->y = y * fdf->section;
+	point->z = fdf->map->map[y][x];
+	point->color = (point->z) ? 1 : 0;
+	point->x -= (fdf->map->width * fdf->section) / 2;
+	point->y -= (fdf->map->height * fdf->section) / 2;
+	point->z *= fdf->section; // zoom
+	x_angle(point->x, &(point->y), &(point->z), x_rot);
+	y_angle(&(point->x), point->y, &(point->z), y_rot);
+	z_angle(&(point->x), &(point->y), point->z, z_rot);
+	point->x += W_WIDTH / 2;
+	point->y += W_HEIGHT / 2;
+
 
 }
 
@@ -31,7 +31,6 @@ void draw_line(t_fdf *fdf, int x, int y)
 	t_point p2;
 
 	create_point(fdf, &p1, x, y);
-//	ft_printf("[%d][%d]\n", x, y);
 	if (x < fdf->map->width - 1)
 	{
 		create_point(fdf, &p2, x + 1, y);
@@ -63,11 +62,14 @@ int fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2)
 	{
 		if (!((int) x > fdf->image.w || x < 0 || (int) y > fdf->image.h ||
 			  y < 0))
-			fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color);
+			if (p1->color || p2->color)
+				fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color1);
+			else
+				fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color2);
 		x += dx;
 		y += dy;
 	}
-	fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color);
+	fdf_put_pixel_to_image(fdf, (int) x, (int) y, COL_YELLOW);
 	return (0);
 }
 

@@ -17,10 +17,6 @@
 # include "mlx.h"
 # include <math.h>
 
-# define H height;
-# define W width;
-# define G general;
-# define M map;
 #define COL_BLACK	0x000000
 #define COL_SILVER	0xc0c0c0
 #define COL_GRAY	0x808080
@@ -37,7 +33,7 @@
 #define W_WIDTH		1920
 #define W_HEIGHT	1080
 #define STEP		50
-#define ZOOM		.2
+#define ZOOM		2
 # define line L
 typedef struct	s_map
 {
@@ -51,6 +47,7 @@ typedef struct	s_point
 	float 		x;
 	float 		y;
 	float		z;
+	int			color;
 } 				t_point;
 
 
@@ -73,10 +70,15 @@ typedef struct	s_fdf_system
 	int		h;
 	void	*mlx;
 	void	*window;
-	int		color;
 	t_image	image;
 	t_map	*map;
 	float	section;
+	int		color1;
+	int		color2;
+	int		background_color;
+	float	x_r;
+	float	y_r;
+	float	z_r;
 }				t_fdf;
 
 

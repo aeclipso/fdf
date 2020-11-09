@@ -17,8 +17,8 @@ float		init_sect(t_fdf *fdf)
 	float	sect_h;
 	float	sect_w;
 
-	sect_h = 864 / fdf->map->height;
-	sect_w = 1536 / fdf->map->width;
+	sect_h = 864 / (fdf->map->height * 2);
+	sect_w = 1536 / (fdf->map->width * 2);
 
 	if ((int)sect_h < (int)sect_w)
 		return (sect_h);
