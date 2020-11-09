@@ -25,40 +25,29 @@ void init_image(t_fdf *fdf, int width, int height)
 			  fdf->image.h, fdf->image.w * fdf->image.h);
 }
 
-void		put_matrix_to_image(t_fdf *fdf)
+void put_matrix_to_image(t_fdf *fdf)
 {
-	int x;
-	int y;
 
-	y = -1;
-	while (++y < fdf->map->height + 1)
-	{
-		x = -1;
-		while (++x < fdf->map->width + 1)
-		{
-			if (x != fdf->map->width)
-				fdf_put_line_to_image(fdf, fdf->image.L * x, fdf->image.L * y, (x + 1) * fdf->image.L, y * fdf->image.L);
-			if (y != fdf->map->height)
-				fdf_put_line_to_image(fdf, fdf->image.L * x, fdf->image.L * y, x * fdf->image.L, (y + 1) * fdf->image.L);
-		}
-	}
-	
-	// fdf_put_line_to_image(fdf, 192, 108, )
 }
 
-void		painter(t_fdf *fdf)
+void painter(t_fdf *fdf)
 {
+	t_point p1;
+	t_point p2;
+
+	p1 = point_init((float)0, (float)0, (float)0);
+	p2 = point_init((float)100, (float)100, (float)0);
 	init_image(fdf, fdf->w, fdf->h); // Инициализация fdf.image
-	fdf_put_background(fdf, COL_BLACK); // Заполнение цветом
-// 	int fdf_put_line_to_image(t_fdf *fdf, int x0, int y0, int x1, int y1)
+//	fdf_put_background(fdf, COL_BLACK); // Заполнение цветом)
+	fdf_put_line_to_image(fdf, &p1, &p2);
 	put_matrix_to_image(fdf);
-	// fdf_put_line_to_image(fdf, 0, 0, fdf->w - 1 ,fdf->h - 1); //напечатать линию
+
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 20, 20);
 }
 
-int				render_manager(t_map *map)
+int render_manager(t_map *map)
 {
-	t_fdf		fdf;
+	t_fdf fdf;
 
 	fdf.map = map;
 	init_display(&fdf, "FDF");

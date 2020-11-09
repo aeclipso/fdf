@@ -121,16 +121,9 @@ add_executable(share_fdf
         libft-printf/src_ftprintf/parser.c
         libft-printf/src_ftprintf/utils.c
         libft-printf/get_next_line.c
-#        minilibx/font.c
-#        minilibx/mlx.h
-#        minilibx/mlx_init_loop.m
-#        minilibx/mlx_int.h
-#        minilibx/mlx_int_str_to_wordtab.c
-#        minilibx/mlx_new_image.m
-#        minilibx/mlx_new_window.h
-#        minilibx/mlx_new_window.m
-#        minilibx/mlx_rgb.c
-#        minilibx/mlx_shaders.c
-#        minilibx/mlx_xpm.c
         init_map.c
-        main.c include/fdf2.h render.c hooks.c render_tools.c)
+        main.c
+        render.c
+        hooks.c
+        render_tools.c
+        math_tools.c)
