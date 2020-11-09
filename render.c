@@ -13,6 +13,8 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->x_r = -3.834442f;
 	fdf->x_r = -2.534443f;
 	fdf->x_r = -2.614443f;
+	fdf->margin_x = 0;
+	fdf->margin_y = 0;
 }
 
 
@@ -50,11 +52,24 @@ void painter(t_fdf *fdf)
 	if (created == 0)
 		created = 1;
 	else
+	{
 		mlx_destroy_image(fdf->mlx, fdf->image.img);
+		mlx_clear_window(fdf->mlx,fdf->window);
+	}
+
+
 	init_image(fdf, fdf->w, fdf->h); // Инициализация fdf.image
 	draw(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, fdf->margin_x, fdf->margin_y);
 }
+
+int	close_window(t_fdf *fdf)
+{
+	mlx_destroy_image(fdf->mlx, fdf->image.img);
+	mlx_destroy_window(fdf->mlx, fdf->window);
+	exit(0);
+}
+
 
 int render_manager(t_map *map)
 {
@@ -63,7 +78,10 @@ int render_manager(t_map *map)
 	fdf.map = map;
 	init_display(&fdf, "FDF");
 	painter(&fdf);
+	mlx_do_key_autorepeaton(fdf.mlx);
 	mlx_key_hook(fdf.window, hooks_manager, &fdf);
+	mlx_hook(fdf.window, 17, 1, close_window, &fdf);
+
 	mlx_loop(fdf.mlx);
 	return (0);
 }

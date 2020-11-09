@@ -79,6 +79,9 @@ typedef struct	s_fdf_system
 	float	x_r;
 	float	y_r;
 	float	z_r;
+	int		margin_x;
+	int		margin_y;
+
 }				t_fdf;
 
 
@@ -98,6 +101,7 @@ int fdf_put_background(t_fdf *fdf, int color);
 int fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2);
 void		draw_line(t_fdf *fdf, int x, int y);
 void		create_point(t_fdf *fdf, t_point *point, int x, int y);
+void painter(t_fdf *fdf);
 //Hooks
 
 int hooks_manager(int keycode, t_fdf *fdf);

@@ -15,7 +15,7 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->color = (point->z) ? 1 : 0;
 	point->x -= (fdf->map->width * fdf->section) / 2;
 	point->y -= (fdf->map->height * fdf->section) / 2;
-	point->z *= fdf->section; // zoom
+	point->z *= fdf->section;
 	x_angle(point->x, &(point->y), &(point->z), x_rot);
 	y_angle(&(point->x), point->y, &(point->z), y_rot);
 	z_angle(&(point->x), &(point->y), point->z, z_rot);
@@ -69,7 +69,10 @@ int fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2)
 		x += dx;
 		y += dy;
 	}
-	fdf_put_pixel_to_image(fdf, (int) x, (int) y, COL_YELLOW);
+	if (p1->color || p2->color)
+		fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color1);
+	else
+		fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color2);
 	return (0);
 }
 
