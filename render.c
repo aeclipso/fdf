@@ -7,6 +7,7 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->mlx = mlx_init();
 	fdf->window = mlx_new_window(fdf->mlx, fdf->w, fdf->h, title);
 	fdf->color = COL_YELLOW;
+	fdf->section = init_sect(fdf);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/08 16:31:54 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/09 17:02:24 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_fdf_system
 	int		color;
 	t_image	image;
 	t_map	*map;
+	float	section;
 }				t_fdf;
 
 
