@@ -1,15 +1,15 @@
 #include "include/fdf.h"
 
 
-t_point point_init(float x, float y, float z)
-{
-	t_point point;
-
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	return (point);
-}
+//t_point point_init(float x, float y, float z)
+//{
+//	t_point point;
+//
+//	point.x = x;
+//	point.y = y;
+//	point.z = z;
+//	return (point);
+//}
 
 
 float	max(float a, float b)

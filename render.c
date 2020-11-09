@@ -25,22 +25,26 @@ void init_image(t_fdf *fdf, int width, int height)
 			  fdf->image.h, fdf->image.w * fdf->image.h);
 }
 
-void put_matrix_to_image(t_fdf *fdf)
+void		draw(t_fdf *fdf)
 {
+	int		x;
+	int		y;
 
+	y = -1;
+	while (++y < fdf->map->height + 1)
+	{
+		x = -1;
+		while (++x < fdf->map->width + 1)
+			draw_line(fdf, x, y);
+	}
 }
 
 void painter(t_fdf *fdf)
 {
-	t_point p1;
-	t_point p2;
-
-	p1 = point_init((float)0, (float)0, (float)0);
-	p2 = point_init((float)100, (float)100, (float)0);
 	init_image(fdf, fdf->w, fdf->h); // Инициализация fdf.image
 //	fdf_put_background(fdf, COL_BLACK); // Заполнение цветом)
-	fdf_put_line_to_image(fdf, &p1, &p2);
-	put_matrix_to_image(fdf);
+//	draw_line(fdf, 2, 5);
+	draw(fdf);
 
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 20, 20);
 }
