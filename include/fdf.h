@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/09 17:02:24 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/09 17:03:36 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_fdf_system
 */
 
 void			init_map(t_map *map, char *arg);
+float			init_sect(t_fdf *fdf);
 
 //Render
 
