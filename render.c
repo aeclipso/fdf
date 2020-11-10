@@ -66,6 +66,7 @@ void painter(t_fdf *fdf)
 	ft_printf("--->Margin x = %d y = %d\n", fdf->margin_x, fdf->margin_y);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img,
 							((fdf->w - fdf->image.w) / 2) + fdf->margin_x, ((fdf->h - fdf->image.h) / 2) + fdf->margin_y) ;
+	render_menu(fdf);
 }
 
 int close_window(t_fdf *fdf)
