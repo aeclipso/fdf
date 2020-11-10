@@ -79,6 +79,8 @@ int hooks_manager(int keycode, t_fdf *fdf)
 
 	if (keycode == 43 || keycode == 47)
 		color_hook(keycode, fdf);
+	if (keycode >= 18 && keycode <= 20)
+		proj_hook(keycode, fdf);
 	painter(fdf);
 	ft_printf("KeyCode =\t%d\n", keycode);
 	return (0);

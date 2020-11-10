@@ -28,7 +28,10 @@ void init_image(t_fdf *fdf, int width, int height)
 										&fdf->image.endian);
 //	fdf->image.w = width;
 //	fdf->image.h = height;
-fdf->image.w =
+	// fdf->image.w = width / 2;
+	// fdf->image.h = height / 2;
+	fdf->margin_x = width / 8;
+	fdf->margin_y = height / 8;
 	fdf->image.line = STEP; //debug it
 	init_sect(fdf);
 	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %f\n", fdf->image.w,
