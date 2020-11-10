@@ -28,18 +28,18 @@ void init_image(t_fdf *fdf, int width, int height)
 										&fdf->image.endian);
 //	fdf->image.w = width;
 //	fdf->image.h = height;
-fdf->image.w =
 	fdf->image.line = STEP; //debug it
 	init_sect(fdf);
-	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %f\n", fdf->image.w,
+	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %f\n",
+			  fdf->image.w,
 			  fdf->image.h, fdf->image.w * fdf->image.h, fdf->image.section);
 
 }
 
-void		draw(t_fdf *fdf)
+void draw(t_fdf *fdf)
 {
-	int		x;
-	int		y;
+	int x;
+	int y;
 
 	y = -1;
 	while (++y < fdf->map->height)
@@ -58,16 +58,18 @@ void painter(t_fdf *fdf)
 	else
 	{
 		mlx_destroy_image(fdf->mlx, fdf->image.img);
-		mlx_clear_window(fdf->mlx,fdf->window);
+		mlx_clear_window(fdf->mlx, fdf->window);
 	}
 	init_image(fdf, fdf->image.w, fdf->image.h);// Инициализация fdf.image
 
-	fdf_put_background(fdf, COL_WHITE);
+//	fdf_put_background(fdf, COL_WHITE);
 	draw(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, fdf->margin_x, fdf->margin_y);
+	ft_printf("--->Margin x = %d y = %d\n", fdf->margin_x, fdf->margin_y);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img,
+							((fdf->w - fdf->image.w) / 2) + fdf->margin_x, ((fdf->h - fdf->image.h) / 2) + fdf->margin_y) ;
 }
 
-int	close_window(t_fdf *fdf)
+int close_window(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->mlx, fdf->image.img);
 	mlx_destroy_window(fdf->mlx, fdf->window);

@@ -31,18 +31,18 @@ static void change_size(int keycode, t_fdf *fdf)
 {
 	if (keycode == 27 && fdf->image.w > 51 && fdf->image.h > 51)
 	{
-		fdf->image.w *= 0.5;
-		fdf->image.h *= 0.5;
+		fdf->image.w *= 0.95;
+		fdf->image.h *= 0.95;
 	}
 	else if (keycode == 27)
 	{
 		fdf->image.w = fdf->w / 32;
 		fdf->image.h = fdf->h / 32;
 	}
-	else if (keycode == 24)
+	else if (keycode == 24 && (fdf->image.w * fdf->image.h < 132710400))
 	{
-		fdf->image.w *= 2;
-		fdf->image.h *= 2;
+		fdf->image.w *= 1.05;
+		fdf->image.h *= 1.05;
 	}
 	ft_printf("Inscrease to x = %d y = %d\n", fdf->image.w, fdf->image.h);
 }
