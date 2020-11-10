@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 12:30:14 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 15:29:21 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct	s_fdf_image
 {
 	void	*img;
 	char	*addr;
-	int 	w;
+	int		w;
 	int		h;
 	int		bits_per_pixel;
 	int		line_length;
