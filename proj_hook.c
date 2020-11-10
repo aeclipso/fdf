@@ -12,24 +12,3 @@
 
 #include "fdf.h"
 
-void		proj_hook(int keycode, t_fdf *fdf)
-{
-	if (keycode == 18)
-	{
-		fdf->x_r = -3.834442f;
-		fdf->y_r = -2.534443f;
-		fdf->z_r = -2.614443f;
-	}
-	if (keycode == 19)
-	{
-		fdf->x_r = 0.0f;
-		fdf->y_r = 0.0f;
-		fdf->z_r = 0.0f;
-	}
-	if (keycode == 20)
-	{
-		fdf->x_r = 2.0f;
-		fdf->y_r = 1.0f;
-		fdf->z_r = 3.0f;
-	}
-}

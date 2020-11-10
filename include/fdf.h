@@ -125,9 +125,6 @@ float	max(float a, float b);
 void	x_angle(float x, float *y, float *z, float angle);
 void	y_angle(float *x, float y, float *z, float angle);
 void	z_angle(float *x, float *y, float z, float angle);
-<<<<<<< HEAD
 void        proj_hook(int keycode, t_fdf *fdf);
-=======
-void	proj_hook(int keycode, t_fdf *fdf);
->>>>>>> c3ac564e5abbcc0e011e347abe52744cc6435cf8
+
 #endif 

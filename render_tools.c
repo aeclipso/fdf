@@ -94,7 +94,7 @@ int fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
 	{
 		ft_printf("error on x = %d, y = %d\n", x, y);
 		ft_printf("error pixel");
-		close_window(fdf);
+//		close_window(fdf);
 	}
 //	ft_printf("[fdf_put_pixel_to_image]x = %d; y = %d", x, y);
 	dst = (unsigned int *) fdf->image.addr;
