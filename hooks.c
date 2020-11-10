@@ -33,18 +33,24 @@ static void change_size(int keycode, t_fdf *fdf)
 	{
 		fdf->image.w *= 0.95;
 		fdf->image.h *= 0.95;
-	}
-	else if (keycode == 27)
+	} else if (keycode == 27)
 	{
 		fdf->image.w = fdf->w / 32;
 		fdf->image.h = fdf->h / 32;
-	}
-	else if (keycode == 24 && (fdf->image.w * fdf->image.h < 132710400))
+	} else if (keycode == 24 && (fdf->image.w * fdf->image.h < 132710400))
 	{
 		fdf->image.w *= 1.05;
 		fdf->image.h *= 1.05;
 	}
 	ft_printf("Inscrease to x = %d y = %d\n", fdf->image.w, fdf->image.h);
+}
+
+static void change_top(int keycode, t_fdf *fdf)
+{
+	if (keycode == 30 && fdf->image.top < 1.3)
+		fdf->image.top += 0.2f;
+	else if (keycode == 33 && fdf->image.top > -1.3)
+		fdf->image.top -= 0.2f;
 }
 
 int hooks_manager(int keycode, t_fdf *fdf)
@@ -76,9 +82,10 @@ int hooks_manager(int keycode, t_fdf *fdf)
 	}
 	if (keycode == 24 || keycode == 27)
 		change_size(keycode, fdf);
-
 	if (keycode == 43 || keycode == 47)
 		color_hook(keycode, fdf);
+	if (keycode == 33 || keycode == 30)
+		change_top(keycode, fdf);
 	painter(fdf);
 	ft_printf("KeyCode =\t%d\n", keycode);
 	return (0);

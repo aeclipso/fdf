@@ -12,8 +12,6 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->y = 0;
 	point->z = 0;
 
-	if (x == 2 && y == 2)
-		ft_printf("");
 
 	point->x = x * fdf->image.section;
 	point->y = y * fdf->image.section;
@@ -21,7 +19,7 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->color = (point->z) ? 1 : 0;
 	point->x -= (fdf->map->width * fdf->image.section) / 2;
 	point->y -= (fdf->map->height * fdf->image.section) / 2;
-	point->z *= fdf->image.section;
+	point->z *= fdf->image.section * fdf->image.top;
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);

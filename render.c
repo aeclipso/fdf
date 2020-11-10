@@ -8,7 +8,6 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->window = mlx_new_window(fdf->mlx, fdf->w, fdf->h, title);
 	fdf->color1 = COL_RED;
 	fdf->color2 = COL_GREEN;
-	fdf->background_color = COL_BLACK;
 	fdf->x_r = -3.834442f;
 	fdf->y_r = -2.534443f;
 	fdf->z_r = -2.614443f;
@@ -16,6 +15,7 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->margin_y = 0;
 	fdf->image.w = fdf->w;
 	fdf->image.h = fdf->h;
+	fdf->image.top = 0.2f;
 }
 
 

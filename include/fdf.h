@@ -69,6 +69,7 @@ typedef struct	s_fdf_image
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	float 	top;
 	float	section;
 	float 	line;
 }				t_image;
@@ -85,7 +86,6 @@ typedef struct	s_fdf_system
 
 	int		color1;
 	int		color2;
-	int		background_color;
 	float	x_r;
 	float	y_r;
 	float	z_r;
@@ -125,5 +125,5 @@ float	max(float a, float b);
 void	x_angle(float x, float *y, float *z, float angle);
 void	y_angle(float *x, float y, float *z, float angle);
 void	z_angle(float *x, float *y, float z, float angle);
-
+void        proj_hook(int keycode, t_fdf *fdf);
 #endif 
