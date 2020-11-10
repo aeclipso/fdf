@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/10 22:09:19 by kupsyloc          #+#    #+#             */
+/*   Updated: 2020/11/10 22:09:19 by kupsyloc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/fdf.h"
 
-void init_display(t_fdf *fdf, char *title)
+void			init_display(t_fdf *fdf, char *title)
 {
 	fdf->w = W_WIDTH;
 	fdf->h = W_HEIGHT;
@@ -18,24 +30,17 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->image.top = 0.2f;
 }
 
-
-void init_image(t_fdf *fdf, int width, int height)
+void			init_image(t_fdf *fdf, int width, int height)
 {
 	fdf->image.img = mlx_new_image(fdf->mlx, width + 1, height + 1);
 	fdf->image.addr = mlx_get_data_addr(fdf->image.img,
 										&fdf->image.bits_per_pixel,
 										&fdf->image.line_length,
 										&fdf->image.endian);
-
-	fdf->image.line = STEP; //debug it
 	init_sect(fdf);
-	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %f\n",
-			  fdf->image.w,
-			  fdf->image.h, fdf->image.w * fdf->image.h, fdf->image.section);
-
 }
 
-void draw(t_fdf *fdf)
+void			draw(t_fdf *fdf)
 {
 	int x;
 	int y;
@@ -49,9 +54,10 @@ void draw(t_fdf *fdf)
 	}
 }
 
-void painter(t_fdf *fdf)
+void			painter(t_fdf *fdf)
 {
-	static int created;
+	static int	created;
+
 	if (created == 0)
 		created = 1;
 	else
@@ -59,24 +65,21 @@ void painter(t_fdf *fdf)
 		mlx_destroy_image(fdf->mlx, fdf->image.img);
 		mlx_clear_window(fdf->mlx, fdf->window);
 	}
-	init_image(fdf, fdf->image.w, fdf->image.h);// Инициализация fdf.image
-
-//	fdf_put_background(fdf, COL_WHITE);
+	init_image(fdf, fdf->image.w, fdf->image.h);
 	draw(fdf);
-	ft_printf("--->Margin x = %d y = %d\n", fdf->margin_x, fdf->margin_y);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img,
-							((fdf->w - fdf->image.w) / 2) + fdf->margin_x, ((fdf->h - fdf->image.h) / 2) + fdf->margin_y) ;
+	((fdf->w - fdf->image.w) / 2) + fdf->margin_x,
+	((fdf->h - fdf->image.h) / 2) + fdf->margin_y);
 }
 
-int close_window(t_fdf *fdf)
+int				close_window(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->mlx, fdf->image.img);
 	mlx_destroy_window(fdf->mlx, fdf->window);
 	exit(0);
 }
 
-
-int render_manager(t_map *map)
+int				render_manager(t_map *map)
 {
 	t_fdf fdf;
 
@@ -84,9 +87,7 @@ int render_manager(t_map *map)
 	init_display(&fdf, "FDF");
 	painter(&fdf);
 	mlx_hook(fdf.window, 2, 0, hooks_manager, &fdf);
-//	mlx_key_hook(fdf.window, hooks_manager, &fdf);
 	mlx_hook(fdf.window, 17, 1, close_window, &fdf);
-
 	mlx_loop(fdf.mlx);
 	return (0);
 }

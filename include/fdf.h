@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 20:48:34 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 22:11:23 by kupsyloc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct	s_fdf_system
 */
 
 void			init_map(t_map *map, char *arg);
-float			init_sect(t_fdf *fdf);
+void			init_sect(t_fdf *fdf);
 void			delete_map(t_map *map);
 
 //Render
@@ -125,6 +125,6 @@ float	max(float a, float b);
 void	x_angle(float x, float *y, float *z, float angle);
 void	y_angle(float *x, float y, float *z, float angle);
 void	z_angle(float *x, float *y, float z, float angle);
-void        proj_hook(int keycode, t_fdf *fdf);
+void	proj_hook(int keycode, t_fdf *fdf);
 
 #endif 

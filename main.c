@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 10:47:46 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/08 16:15:29 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 22:10:25 by kupsyloc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-/*
-◦ open, read, write, close
-◦ malloc, free
-◦ perror, strerror
-◦ exit
-◦ All the functions defined in the math library (-lm and man 3 math)
-◦ All the functions defined in the miniLibX library.
-*/
-
+#include "include/fdf.h"
 #include <stdio.h>
 #include <errno.h>
-
 
 void		usage(void)
 {
@@ -47,17 +37,12 @@ void			delete_map(t_map *map)
 	del = NULL;
 }
 
-// void			calculate_mapfield(t_map )
-
-
-
 int				core(char *arg)
 {
 	t_map		map;
 
 	init_map(&map, arg);
 	render_manager(&map);
-	
 	delete_map(&map);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 17:20:13 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 18:12:26 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 22:20:19 by kupsyloc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "include/fdf.h"
 
 static int			how_many_str(char *arg)
 {
@@ -46,7 +46,6 @@ static int			how_many_dot(char *arg)
 	}
 	else
 		return (0);
-
 	close(fd);
 	return (count);
 }
@@ -76,7 +75,7 @@ static int			**create_mem_map(int h, int w)
 	while (i < h)
 	{
 		if (!(res[i] = (int *)malloc(sizeof(int) * w)))
-			return(deleter(i, res));
+			return (deleter(i, res));
 		i++;
 	}
 	res[i] = NULL;
@@ -127,6 +126,11 @@ int					readfrom(t_map *map, char *arg)
 
 void				init_map(t_map *map, char *arg)
 {
+	int				i;
+	int				j;
+
+	i = -1;
+	j = -1;
 	map->height = how_many_str(arg);
 	map->width = how_many_dot(arg);
 	map->map = create_mem_map(map->height, map->width);
@@ -136,10 +140,6 @@ void				init_map(t_map *map, char *arg)
 	}
 	ft_printf("v etom file strok = %i\n", map->height);
 	ft_printf("v etom file tochek = %i\n", map->width);
-
-
-	int i = -1;
-	int j = -1;
 	while (++i < map->height)
 	{
 		j = -1;

@@ -1,18 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_tools.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/10 22:06:23 by kupsyloc          #+#    #+#             */
+/*   Updated: 2020/11/10 22:06:41 by kupsyloc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/fdf.h"
 
-void create_point(t_fdf *fdf, t_point *point, int x, int y)
+void		create_point(t_fdf *fdf, t_point *point, int x, int y)
 {
-	// float x_rot = -3.834442f;
-	// float z_rot = -2.534443f;
-	// float y_rot = -2.614443f;
-	// float x_rot = -90.0 * M_PI / 360;
-	// float z_rot = 0.0;
-	// float y_rot = 1.0;
-	point->x = 0;
-	point->y = 0;
-	point->z = 0;
-
-
 	point->x = x * fdf->image.section;
 	point->y = y * fdf->image.section;
 	point->z = fdf->map->map[y][x];
@@ -25,17 +26,12 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
 	point->x += fdf->image.w / 2;
 	point->y += fdf->image.h / 2;
-//	point->x = (point->x < 0) ? 0 : point->x;
-//	point->y = (point->y < 0) ? 0 : point->y;
-
-
-
 }
 
-void draw_line(t_fdf *fdf, int x, int y)
+void		draw_line(t_fdf *fdf, int x, int y)
 {
-	t_point p1;
-	t_point p2;
+	t_point	p1;
+	t_point	p2;
 
 	create_point(fdf, &p1, x, y);
 	if (x < fdf->map->width - 1)
@@ -50,13 +46,21 @@ void draw_line(t_fdf *fdf, int x, int y)
 	}
 }
 
-int fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2)
+void		fdf_put_line_to_image_2(t_fdf *fdf, float x, float y, int color)
 {
-	float x;
-	float y;
-	float dx;
-	float dy;
-	float m;
+	if (color)
+		fdf_put_pixel_to_image(fdf, (int)x, (int)y, fdf->color1);
+	else
+		fdf_put_pixel_to_image(fdf, (int)x, (int)y, fdf->color2);
+}
+
+int			fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2)
+{
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	m;
 
 	x = p1->x;
 	y = p1->y;
@@ -65,53 +69,40 @@ int fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2)
 	m = max(mod(dx), mod(dy));
 	dx /= m;
 	dy /= m;
-	while ((int) (p2->x - x) || (int) (p2->y - y))
+	while ((int)(p2->x - x) || (int)(p2->y - y))
 	{
-		if (!((int) x > fdf->image.w || x < 0 || (int) y > fdf->image.h || y < 0))
-		{
-			if (p1->color || p2->color)
-				fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color1);
-			else
-				fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color2);
-		}
+		if (!((int)x > fdf->image.w || x < 0 || (int)y > fdf->image.h || y < 0))
+			fdf_put_line_to_image_2(fdf, x, y, p1->color || p2->color);
 		x += dx;
 		y += dy;
 	}
-	if (p1->color || p2->color)
-		fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color1);
-	else
-		fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color2);
+	fdf_put_line_to_image_2(fdf, x, y, p1->color || p2->color);
 	return (0);
 }
 
-
-int fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
+int					fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
 {
-	unsigned int *dst;
-
+	unsigned int	*dst;
 
 	if (x > fdf->image.w || y > fdf->image.h || x < 0 || y < 0)
 	{
 		ft_printf("error on x = %d, y = %d\n", x, y);
 		ft_printf("error pixel");
-//		close_window(fdf);
 	}
-//	ft_printf("[fdf_put_pixel_to_image]x = %d; y = %d", x, y);
-	dst = (unsigned int *) fdf->image.addr;
+	dst = (unsigned int *)fdf->image.addr;
 	dst[x + (y * fdf->image.line_length / 4)] = color;
 	return (0);
 }
 
-
-int fdf_put_background(t_fdf *fdf, int color)
+int					fdf_put_background(t_fdf *fdf, int color)
 {
-	unsigned int size;
-	unsigned int i;
-	unsigned int *dst;
+	unsigned int	size;
+	unsigned int	i;
+	unsigned int	*dst;
 
 	i = -1;
 	size = fdf->image.h * fdf->image.w;
-	dst = (unsigned int *) fdf->image.addr;
+	dst = (unsigned int *)fdf->image.addr;
 	ft_printf("Background on %d pixels\n", size);
 	while (size > 0 && ++i != size)
 		dst[i] = color;
