@@ -6,7 +6,7 @@
 /*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 22:09:19 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/10 22:09:19 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/10 22:24:23 by kupsyloc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			painter(t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img,
 	((fdf->w - fdf->image.w) / 2) + fdf->margin_x,
 	((fdf->h - fdf->image.h) / 2) + fdf->margin_y);
+	render_menu(fdf);
 }
 
 int				close_window(t_fdf *fdf)
