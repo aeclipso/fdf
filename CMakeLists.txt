@@ -7,7 +7,7 @@ include_directories(include)
 include_directories(libft-printf/include)
 include_directories(minilibx)
 
-set(CMAKE_C_FLAGS "-I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit")
+set(CMAKE_C_FLAGS "-O3 -ffast-math -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit")
 
 
 add_executable(share_fdf

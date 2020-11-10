@@ -27,6 +27,26 @@ static void color_hook(int keycode, t_fdf *fdf)
 	}
 }
 
+static void change_size(int keycode, t_fdf *fdf)
+{
+	if (keycode == 27 && fdf->image.w > 51 && fdf->image.h > 51)
+	{
+		fdf->image.w *= 0.5;
+		fdf->image.h *= 0.5;
+	}
+	else if (keycode == 27)
+	{
+		fdf->image.w = fdf->w / 32;
+		fdf->image.h = fdf->h / 32;
+	}
+	else if (keycode == 24)
+	{
+		fdf->image.w *= 2;
+		fdf->image.h *= 2;
+	}
+	ft_printf("Inscrease to x = %d y = %d\n", fdf->image.w, fdf->image.h);
+}
+
 int hooks_manager(int keycode, t_fdf *fdf)
 {
 	if (keycode == 53 || keycode == 256 || keycode == 259)
@@ -54,14 +74,8 @@ int hooks_manager(int keycode, t_fdf *fdf)
 		fdf->y_r = (keycode == 7) ? fdf->y_r += 0.01 : fdf->y_r;
 		fdf->z_r = (keycode == 8) ? fdf->z_r += 0.01 : fdf->z_r;
 	}
-	if (keycode == 24 || keycode == 78)
-	{	//ломается при выходе за границы экрана + -
-		fdf->image.w = (keycode == 24) ? fdf->image.w += 100 : fdf->image.w;
-		fdf->image.h = (keycode == 24) ? fdf->image.h += 100 : fdf->image.h;
-		fdf->image.w = (keycode == 78) ? fdf->image.w -= 100 : fdf->image.w;
-		fdf->image.h = (keycode == 78) ? fdf->image.h -= 100 : fdf->image.h;
-		ft_printf("Inscrease to x = %d y = %d", fdf->image.w, fdf->image.h);
-	}
+	if (keycode == 24 || keycode == 27)
+		change_size(keycode, fdf);
 
 	if (keycode == 43 || keycode == 47)
 		color_hook(keycode, fdf);

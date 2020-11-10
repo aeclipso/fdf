@@ -26,11 +26,12 @@ void init_image(t_fdf *fdf, int width, int height)
 										&fdf->image.bits_per_pixel,
 										&fdf->image.line_length,
 										&fdf->image.endian);
-	fdf->image.w = width;
-	fdf->image.h = height;
+//	fdf->image.w = width;
+//	fdf->image.h = height;
+fdf->image.w =
 	fdf->image.line = STEP; //debug it
-	fdf->image.section = init_sect(fdf);
-	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %d\n", fdf->image.w,
+	init_sect(fdf);
+	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %f\n", fdf->image.w,
 			  fdf->image.h, fdf->image.w * fdf->image.h, fdf->image.section);
 
 }
@@ -59,7 +60,9 @@ void painter(t_fdf *fdf)
 		mlx_destroy_image(fdf->mlx, fdf->image.img);
 		mlx_clear_window(fdf->mlx,fdf->window);
 	}
-	init_image(fdf, fdf->image.w, fdf->image.h); // Инициализация fdf.image
+	init_image(fdf, fdf->image.w, fdf->image.h);// Инициализация fdf.image
+
+	fdf_put_background(fdf, COL_WHITE);
 	draw(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, fdf->margin_x, fdf->margin_y);
 }

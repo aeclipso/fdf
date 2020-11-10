@@ -12,6 +12,9 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->y = 0;
 	point->z = 0;
 
+	if (x == 2 && y == 2)
+		ft_printf("");
+
 	point->x = x * fdf->image.section;
 	point->y = y * fdf->image.section;
 	point->z = fdf->map->map[y][x];
@@ -22,8 +25,11 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
-	point->x += W_WIDTH / 2;
-	point->y += W_HEIGHT / 2;
+	point->x += fdf->image.w / 2;
+	point->y += fdf->image.h / 2;
+//	point->x = (point->x < 0) ? 0 : point->x;
+//	point->y = (point->y < 0) ? 0 : point->y;
+
 
 
 }
