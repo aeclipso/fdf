@@ -36,11 +36,24 @@ int hooks_manager(int keycode, t_fdf *fdf)
 	}
 	if (keycode > 122 && keycode < 127)
 	{
-		fdf->margin_x = (keycode == 123) ? fdf->margin_x -= 50 : fdf->margin_x;
-		fdf->margin_x = (keycode == 124) ? fdf->margin_x += 50 : fdf->margin_x;
-		fdf->margin_y = (keycode == 125) ? fdf->margin_y += 50 : fdf->margin_y;
-		fdf->margin_y = (keycode == 126) ? fdf->margin_y -= 50 : fdf->margin_y;
+		fdf->margin_x = (keycode == 123) ? fdf->margin_x -= 10 : fdf->margin_x;
+		fdf->margin_x = (keycode == 124) ? fdf->margin_x += 10 : fdf->margin_x;
+		fdf->margin_y = (keycode == 125) ? fdf->margin_y += 10 : fdf->margin_y;
+		fdf->margin_y = (keycode == 126) ? fdf->margin_y -= 10 : fdf->margin_y;
 	}
+	if (keycode >= 0 && keycode <= 2)
+	{
+		fdf->x_r = (keycode == 0) ? fdf->x_r -= 0.01 : fdf->x_r;
+		fdf->y_r = (keycode == 1) ? fdf->y_r -= 0.01 : fdf->y_r;
+		fdf->z_r = (keycode == 2) ? fdf->z_r -= 0.01 : fdf->z_r;
+	}
+	if (keycode >= 6 && keycode <= 8)
+	{
+		fdf->x_r = (keycode == 6) ? fdf->x_r += 0.01 : fdf->x_r;
+		fdf->y_r = (keycode == 7) ? fdf->y_r += 0.01 : fdf->y_r;
+		fdf->z_r = (keycode == 8) ? fdf->z_r += 0.01 : fdf->z_r;
+	}
+
 	if (keycode == 43 || keycode == 47)
 		color_hook(keycode, fdf);
 	painter(fdf);

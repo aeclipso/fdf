@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/09 17:03:36 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:30:14 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@
 #define STEP		50
 #define ZOOM		2
 # define line L
+
+// typedef struct	s_rot
+// {
+// 	float		x_rot;
+// 	float		y_rot;
+// 	float		z_rot;
+// }				t_rot;
+
+
 typedef struct	s_map
 {
 	int			height;

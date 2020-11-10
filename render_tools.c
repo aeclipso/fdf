@@ -2,9 +2,12 @@
 
 void create_point(t_fdf *fdf, t_point *point, int x, int y)
 {
-	float x_rot = -3.834442f;
-	float z_rot = -2.534443f;
-	float y_rot = -2.614443f;
+	// float x_rot = -3.834442f;
+	// float z_rot = -2.534443f;
+	// float y_rot = -2.614443f;
+	// float x_rot = -90.0 * M_PI / 360;
+	// float z_rot = 0.0;
+	// float y_rot = 1.0;
 	point->x = 0;
 	point->y = 0;
 	point->z = 0;
@@ -16,9 +19,9 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->x -= (fdf->map->width * fdf->section) / 2;
 	point->y -= (fdf->map->height * fdf->section) / 2;
 	point->z *= fdf->section;
-	x_angle(point->x, &(point->y), &(point->z), x_rot);
-	y_angle(&(point->x), point->y, &(point->z), y_rot);
-	z_angle(&(point->x), &(point->y), point->z, z_rot);
+	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
+	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
+	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
 	point->x += W_WIDTH / 2;
 	point->y += W_HEIGHT / 2;
 
@@ -60,12 +63,13 @@ int fdf_put_line_to_image(t_fdf *fdf, t_point *p1, t_point *p2)
 	dy /= m;
 	while ((int) (p2->x - x) || (int) (p2->y - y))
 	{
-		if (!((int) x > fdf->image.w || x < 0 || (int) y > fdf->image.h ||
-			  y < 0))
+		if (!((int) x > fdf->image.w || x < 0 || (int) y > fdf->image.h || y < 0))
+		{
 			if (p1->color || p2->color)
 				fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color1);
 			else
 				fdf_put_pixel_to_image(fdf, (int) x, (int) y, fdf->color2);
+		}
 		x += dx;
 		y += dy;
 	}

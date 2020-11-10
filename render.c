@@ -11,8 +11,8 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->background_color = COL_BLACK;
 	fdf->section = init_sect(fdf);
 	fdf->x_r = -3.834442f;
-	fdf->x_r = -2.534443f;
-	fdf->x_r = -2.614443f;
+	fdf->y_r = -2.534443f;
+	fdf->z_r = -2.614443f;
 	fdf->margin_x = 0;
 	fdf->margin_y = 0;
 }
