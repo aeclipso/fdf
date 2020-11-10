@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 17:20:13 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/07 17:17:37 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:12:26 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ void				fill_str(t_map *map, char *s, int counter)
 		map->map[counter][i] = ft_atoi(spl[i]);
 		i++;
 	}
+	i = 0;
+	while (spl[i])
+	{
+		free(spl[i]);
+		i++;
+	}
+	free(spl);
 }
 
 int					readfrom(t_map *map, char *arg)
