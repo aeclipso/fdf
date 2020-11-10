@@ -12,13 +12,13 @@ void create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->y = 0;
 	point->z = 0;
 
-	point->x = x * fdf->section;
-	point->y = y * fdf->section;
+	point->x = x * fdf->image.section;
+	point->y = y * fdf->image.section;
 	point->z = fdf->map->map[y][x];
 	point->color = (point->z) ? 1 : 0;
-	point->x -= (fdf->map->width * fdf->section) / 2;
-	point->y -= (fdf->map->height * fdf->section) / 2;
-	point->z *= fdf->section;
+	point->x -= (fdf->map->width * fdf->image.section) / 2;
+	point->y -= (fdf->map->height * fdf->image.section) / 2;
+	point->z *= fdf->image.section;
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
@@ -90,8 +90,7 @@ int fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
 	{
 		ft_printf("error on x = %d, y = %d\n", x, y);
 		ft_printf("error pixel");
-		exit(1);
-		return (0);
+		close_window(fdf);
 	}
 //	ft_printf("[fdf_put_pixel_to_image]x = %d; y = %d", x, y);
 	dst = (unsigned int *) fdf->image.addr;

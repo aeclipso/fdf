@@ -9,12 +9,13 @@ void init_display(t_fdf *fdf, char *title)
 	fdf->color1 = COL_RED;
 	fdf->color2 = COL_GREEN;
 	fdf->background_color = COL_BLACK;
-	fdf->section = init_sect(fdf);
 	fdf->x_r = -3.834442f;
 	fdf->y_r = -2.534443f;
 	fdf->z_r = -2.614443f;
 	fdf->margin_x = 0;
 	fdf->margin_y = 0;
+	fdf->image.w = fdf->w;
+	fdf->image.h = fdf->h;
 }
 
 
@@ -28,8 +29,10 @@ void init_image(t_fdf *fdf, int width, int height)
 	fdf->image.w = width;
 	fdf->image.h = height;
 	fdf->image.line = STEP; //debug it
-	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d\n", fdf->image.w,
-			  fdf->image.h, fdf->image.w * fdf->image.h);
+	fdf->image.section = init_sect(fdf);
+	ft_printf("[Create Image] X = [%d], Y = [%d], SQR = %d, SECTION %d\n", fdf->image.w,
+			  fdf->image.h, fdf->image.w * fdf->image.h, fdf->image.section);
+
 }
 
 void		draw(t_fdf *fdf)
@@ -56,9 +59,7 @@ void painter(t_fdf *fdf)
 		mlx_destroy_image(fdf->mlx, fdf->image.img);
 		mlx_clear_window(fdf->mlx,fdf->window);
 	}
-
-
-	init_image(fdf, fdf->w, fdf->h); // Инициализация fdf.image
+	init_image(fdf, fdf->image.w, fdf->image.h); // Инициализация fdf.image
 	draw(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, fdf->margin_x, fdf->margin_y);
 }
@@ -78,8 +79,8 @@ int render_manager(t_map *map)
 	fdf.map = map;
 	init_display(&fdf, "FDF");
 	painter(&fdf);
-	mlx_do_key_autorepeaton(fdf.mlx);
-	mlx_key_hook(fdf.window, hooks_manager, &fdf);
+	mlx_hook(fdf.window, 2, 0, hooks_manager, &fdf);
+//	mlx_key_hook(fdf.window, hooks_manager, &fdf);
 	mlx_hook(fdf.window, 17, 1, close_window, &fdf);
 
 	mlx_loop(fdf.mlx);

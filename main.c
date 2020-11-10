@@ -55,8 +55,7 @@ int				core(char *arg)
 {
 	t_map		map;
 
-	init_map(&map, arg); //init struct for all
-	// calculate_mapfield(&map);
+	init_map(&map, arg);
 	render_manager(&map);
 	
 	delete_map(&map);

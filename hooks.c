@@ -31,6 +31,7 @@ int hooks_manager(int keycode, t_fdf *fdf)
 {
 	if (keycode == 53 || keycode == 256 || keycode == 259)
 	{
+		delete_map(fdf->map);
 		mlx_destroy_window(fdf->mlx, fdf->window);
 		exit(0);
 	}
@@ -53,12 +54,13 @@ int hooks_manager(int keycode, t_fdf *fdf)
 		fdf->y_r = (keycode == 7) ? fdf->y_r += 0.01 : fdf->y_r;
 		fdf->z_r = (keycode == 8) ? fdf->z_r += 0.01 : fdf->z_r;
 	}
-	if (keycode == 69 || keycode == 78)
-	{	//ломается при выходе за границы экрана
-		fdf->image.w = (keycode == 69) ? fdf->image.w += 1 : fdf->image.w;
-		fdf->image.h = (keycode == 69) ? fdf->image.h += 1 : fdf->image.h;
-		fdf->image.w = (keycode == 78) ? fdf->image.w -= 1 : fdf->image.w;
-		fdf->image.h = (keycode == 78) ? fdf->image.h -= 1 : fdf->image.h;
+	if (keycode == 24 || keycode == 78)
+	{	//ломается при выходе за границы экрана + -
+		fdf->image.w = (keycode == 24) ? fdf->image.w += 100 : fdf->image.w;
+		fdf->image.h = (keycode == 24) ? fdf->image.h += 100 : fdf->image.h;
+		fdf->image.w = (keycode == 78) ? fdf->image.w -= 100 : fdf->image.w;
+		fdf->image.h = (keycode == 78) ? fdf->image.h -= 100 : fdf->image.h;
+		ft_printf("Inscrease to x = %d y = %d", fdf->image.w, fdf->image.h);
 	}
 
 	if (keycode == 43 || keycode == 47)

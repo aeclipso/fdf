@@ -69,6 +69,7 @@ typedef struct	s_fdf_image
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	float	section;
 	float 	line;
 }				t_image;
 
@@ -81,7 +82,7 @@ typedef struct	s_fdf_system
 	void	*window;
 	t_image	image;
 	t_map	*map;
-	float	section;
+
 	int		color1;
 	int		color2;
 	int		background_color;
@@ -101,6 +102,7 @@ typedef struct	s_fdf_system
 
 void			init_map(t_map *map, char *arg);
 float			init_sect(t_fdf *fdf);
+void			delete_map(t_map *map);
 
 //Render
 
@@ -115,7 +117,8 @@ void painter(t_fdf *fdf);
 
 int hooks_manager(int keycode, t_fdf *fdf);
 
-
+// Stop render
+int	close_window(t_fdf *fdf);
 // Math
 float	mod(float nbr);
 float	max(float a, float b);
