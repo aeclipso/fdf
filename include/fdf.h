@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 15:29:21 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/10 20:48:34 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,9 @@ float	max(float a, float b);
 void	x_angle(float x, float *y, float *z, float angle);
 void	y_angle(float *x, float y, float *z, float angle);
 void	z_angle(float *x, float *y, float z, float angle);
+<<<<<<< HEAD
 void        proj_hook(int keycode, t_fdf *fdf);
+=======
+void	proj_hook(int keycode, t_fdf *fdf);
+>>>>>>> c3ac564e5abbcc0e011e347abe52744cc6435cf8
 #endif 

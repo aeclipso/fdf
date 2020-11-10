@@ -84,8 +84,13 @@ int hooks_manager(int keycode, t_fdf *fdf)
 		change_size(keycode, fdf);
 	if (keycode == 43 || keycode == 47)
 		color_hook(keycode, fdf);
+<<<<<<< HEAD
 	if (keycode == 33 || keycode == 30)
 		change_top(keycode, fdf);
+=======
+	if (keycode >= 18 && keycode <= 20)
+		proj_hook(keycode, fdf);
+>>>>>>> c3ac564e5abbcc0e011e347abe52744cc6435cf8
 	painter(fdf);
 	ft_printf("KeyCode =\t%d\n", keycode);
 	return (0);
