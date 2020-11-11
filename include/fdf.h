@@ -126,7 +126,7 @@ void	x_angle(float x, float *y, float *z, float angle);
 void	y_angle(float *x, float y, float *z, float angle);
 void	z_angle(float *x, float *y, float z, float angle);
 void	proj_hook(int keycode, t_fdf *fdf);
-
+void	*render_menu(t_fdf *fdf);
 #endif 
 
 //sega 20-60, 10-70, нужно ограничение с отрицательной стороны тоже

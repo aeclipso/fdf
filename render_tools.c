@@ -24,8 +24,8 @@ void		create_point(t_fdf *fdf, t_point *point, int x, int y)
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
-	point->x += fdf->image.w / 2;
-	point->y += fdf->image.h / 2;
+	point->x += fdf->image.w / 2 + fdf->margin_x;
+	point->y += fdf->image.h / 2 + fdf->margin_y;
 }
 
 void		draw_line(t_fdf *fdf, int x, int y)
@@ -86,8 +86,10 @@ int					fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
 
 	if (x > fdf->image.w || y > fdf->image.h || x < 0 || y < 0)
 	{
-		ft_printf("error on x = %d, y = %d\n", x, y);
-		ft_printf("error pixel");
+//		ft_printf("")
+		ft_printf("error pixel on x = %d, y = %d, [%d,%d] \n", x, y, fdf->image.w, fdf->image.h);
+//		ft_printf("error pixel");
+		return 0;
 	}
 	dst = (unsigned int *)fdf->image.addr;
 	dst[x + (y * fdf->image.line_length / 4)] = color;
