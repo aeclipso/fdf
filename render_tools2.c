@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_tools2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 21:23:11 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 22:23:52 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/11 10:32:17 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		*render_menu(t_fdf *fdf)
 	int		x;
 	int		i;
 
-	i = 0;
+	i = -1;
 	x = 12;
 	if (!(menu = (char **)malloc(sizeof(char *) * x + 1)))
 		return NULL;
@@ -35,9 +35,10 @@ void		*render_menu(t_fdf *fdf)
 	menu[9] = ft_strdup("COLORS:\t< >");
 	menu[10] = ft_strdup("Z:\t\t\t[ ]");
 	menu[11] = ft_strdup("POSITION: ARROWS-KEYS");
-	while (menu[i])
+	while (menu[++i])
 	{
 		mlx_string_put(fdf->mlx, fdf->window, 20, 20 * i, COL_LIME, menu[i]);
-		i++;
+		free(menu[i]);
 	}
+	free(menu);
 }

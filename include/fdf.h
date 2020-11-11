@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 22:22:47 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/11 10:41:24 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,3 +128,5 @@ void	z_angle(float *x, float *y, float z, float angle);
 void	proj_hook(int keycode, t_fdf *fdf);
 
 #endif 
+
+//sega 20-60, 10-70, нужно ограничение с отрицательной стороны тоже
