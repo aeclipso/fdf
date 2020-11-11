@@ -57,6 +57,7 @@ typedef struct	s_point
 	float 		y;
 	float		z;
 	int			color;
+	int 		print;
 } 				t_point;
 
 
@@ -69,7 +70,7 @@ typedef struct	s_fdf_image
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	float 	top;
+	int 	top;
 	float	section;
 	float 	line;
 }				t_image;
