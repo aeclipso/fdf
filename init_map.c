@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 17:20:13 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/11 16:32:05 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:37:18 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,9 @@ void				init_map(t_map *map, char *arg)
 	if (readfrom(map, arg) == 0 || map->height == 0 || map->width == 0)
 	{
 		ft_printf("Wrong Mapfile\n");
+		exit(1);
 	}
+	escape_map(map);
 	ft_printf("v etom file strok = %i\n", map->height);
 	ft_printf("v etom file tochek = %i\n", map->width);
 	while (++i < map->height)
@@ -152,38 +154,3 @@ void				init_map(t_map *map, char *arg)
 		ft_printf("\n");
 	}
 }
-
-static size_t				coef_fordel(size_t q)
-{
-	size_t			delim;
-
-	delim = 10;
-	while (q /= 10)
-		delim *= 10;
-	return (delim);
-}
-
-size_t				find_qf(t_fdf *fdf)
-{
-	int				max;
-	int				min;
-	int				i;
-	int				j;
-
-	min = 2147483647;
-	max = -2147483648;
-	i = -1;
-	while (++i < fdf->map->height)
-	{
-		j = -1;
-		while (++j < fdf->map->width)
-		{
-			if (fdf->map->map[i][j] < min)
-				min = fdf->map->map[i][j];
-			if (fdf->map->map[i][j] > max)
-				max = fdf->map->map[i][j];
-		}
-	}
-	return(corf_fordel((size_t)ft_abs(max - min)));
-}
-

@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 21:51:26 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/11 10:55:20 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:41:19 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ static void		change_size(int keycode, t_fdf *fdf)
 {
 	if (keycode == 27 && fdf->image.section > -100)
 	{
-		fdf->image.section /= 2;
+		fdf->image.section -= 10;
 	}
 	else if (keycode == 24)
 	{
-		fdf->image.section *= 2;
+		fdf->image.section += 10;
 	}
 	ft_printf("[Change_size] fdf->image.section = %f\n", fdf->image.section);
 }
