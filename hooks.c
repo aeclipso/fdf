@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 21:51:26 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/10 21:53:03 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/11 10:55:20 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void		change_size(int keycode, t_fdf *fdf)
 
 static void		change_top(int keycode, t_fdf *fdf)
 {
-	if (keycode == 30 && fdf->image.top < 2.1f)
+	if (keycode == 30 && fdf->image.top < 2.0f) //смотреть во что превращается z при этом тоже
 		fdf->image.top += 0.2f;
 	else if (keycode == 33 && fdf->image.top > -2.1f)
 		fdf->image.top -= 0.2f;

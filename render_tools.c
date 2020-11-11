@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 22:06:23 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/10 22:06:41 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/11 10:48:47 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		create_point(t_fdf *fdf, t_point *point, int x, int y)
 	point->color = (point->z) ? 1 : 0;
 	point->x -= (fdf->map->width * fdf->image.section) / 2;
 	point->y -= (fdf->map->height * fdf->image.section) / 2;
-	point->z *= fdf->image.section * fdf->image.top;
+	point->z *= fdf->image.section * fdf->image.top; //?
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
