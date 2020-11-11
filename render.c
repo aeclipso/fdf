@@ -28,6 +28,7 @@ void			init_display(t_fdf *fdf, char *title)
 	fdf->image.w = fdf->w;
 	fdf->image.h = fdf->h;
 	fdf->image.top = 0.2f;
+	init_sect(fdf);
 }
 
 void			init_image(t_fdf *fdf, int width, int height)
@@ -37,7 +38,7 @@ void			init_image(t_fdf *fdf, int width, int height)
 										&fdf->image.bits_per_pixel,
 										&fdf->image.line_length,
 										&fdf->image.endian);
-	init_sect(fdf);
+
 }
 
 void			draw(t_fdf *fdf)
@@ -67,9 +68,7 @@ void			painter(t_fdf *fdf)
 	}
 	init_image(fdf, fdf->image.w, fdf->image.h);
 	draw(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img,
-	((fdf->w - fdf->image.w) / 2) + fdf->margin_x,
-	((fdf->h - fdf->image.h) / 2) + fdf->margin_y);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 0, 0);
 	render_menu(fdf);
 }
 
