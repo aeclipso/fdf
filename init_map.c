@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 17:20:13 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/10 22:20:19 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/11 12:26:30 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static int			**create_mem_map(int h, int w)
 	int				**res;
 	int				i;
 
+	if (h == 0 || w == 0)
+		exit(1);
 	i = 0;
 	if (!(res = (int **)malloc(sizeof(int *) * (h + 1))))
 		return (NULL);
@@ -134,7 +136,7 @@ void				init_map(t_map *map, char *arg)
 	map->height = how_many_str(arg);
 	map->width = how_many_dot(arg);
 	map->map = create_mem_map(map->height, map->width);
-	if (readfrom(map, arg) == 0)
+	if (readfrom(map, arg) == 0 || map->height == 0 || map->width == 0)
 	{
 		ft_printf("Wrong Mapfile\n");
 	}
