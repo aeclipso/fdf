@@ -27,7 +27,7 @@ void			init_display(t_fdf *fdf, char *title)
 	fdf->margin_y = 0;
 	fdf->image.w = fdf->w;
 	fdf->image.h = fdf->h;
-	fdf->image.top = 0.2f;
+	fdf->image.top = 1;
 	init_sect(fdf);
 }
 

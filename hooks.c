@@ -19,18 +19,21 @@ void			proj_hook(int keycode, t_fdf *fdf)
 		fdf->x_r = -3.834442f;
 		fdf->y_r = -2.534443f;
 		fdf->z_r = -2.614443f;
+		fdf->image.top = 50;
 	}
 	if (keycode == 19)
 	{
 		fdf->x_r = 0.0f;
 		fdf->y_r = 0.0f;
 		fdf->z_r = 0.0f;
+		fdf->image.top = 50;
 	}
 	if (keycode == 20)
 	{
 		fdf->x_r = 2.0f;
 		fdf->y_r = 1.0f;
 		fdf->z_r = 3.0f;
+		fdf->image.top = 150;
 	}
 }
 
@@ -85,13 +88,13 @@ static void		color_hook(int keycode, t_fdf *fdf)
 
 static void		change_size(int keycode, t_fdf *fdf)
 {
-	if (keycode == 27)
+	if (keycode == 27 && fdf->image.section > -100)
 	{
-		fdf->image.section--;
+		fdf->image.section /= 2;
 	}
 	else if (keycode == 24)
 	{
-		fdf->image.section++;
+		fdf->image.section *= 2;
 	}
 	ft_printf("[Change_size] fdf->image.section = %f\n", fdf->image.section);
 }
@@ -106,10 +109,11 @@ static void		change_size(int keycode, t_fdf *fdf)
 
 static void		change_top(int keycode, t_fdf *fdf)
 {
-	if (keycode == 30) //смотреть во что превращается z при этом тоже
-		fdf->image.top += 0.5f;
-	else if (keycode == 33)
-		fdf->image.top -= 0.5f;
+	if (keycode == 30 && fdf->image.top < 150) //смотреть во что превращается z при этом тоже
+		fdf->image.top += 1;
+	else if (keycode == 33 && fdf->image.top > -150)
+		fdf->image.top -= 1;
+	ft_printf("top = %d\n", fdf->image.top);
 }
 
 int				hooks_manager(int keycode, t_fdf *fdf)

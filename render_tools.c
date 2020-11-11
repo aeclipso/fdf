@@ -16,16 +16,29 @@ void		create_point(t_fdf *fdf, t_point *point, int x, int y)
 {
 	point->x = x * fdf->image.section;
 	point->y = y * fdf->image.section;
-	point->z = fdf->map->map[y][x];
+	point->z = (fdf->map->map[y][x]) ? (float)(fdf->map->map[y][x]) : 0.0f;
 	point->color = (point->z) ? 1 : 0;
 	point->x -= (fdf->map->width * fdf->image.section) / 2;
 	point->y -= (fdf->map->height * fdf->image.section) / 2;
-	point->z *= fdf->image.section * fdf->image.top; //?
+	point->z *= fdf->image.top;
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
 	point->x += fdf->image.w / 2 + fdf->margin_x;
 	point->y += fdf->image.h / 2 + fdf->margin_y;
+
+	if (!((int)point->x > fdf->image.w || (int)point->y > fdf->image.h
+	 || point->x || point->y < 0)) {
+		point->print =  ((int)point->x > fdf->image.w || (int)point->y > fdf->image.h
+						 || point->x || point->y < 0) ? 1 : 0;
+		point->z = 0;
+		point->x = 0;
+		point->y = 0;
+	}
+
+
+
+
 }
 
 void		draw_line(t_fdf *fdf, int x, int y)
@@ -33,21 +46,27 @@ void		draw_line(t_fdf *fdf, int x, int y)
 	t_point	p1;
 	t_point	p2;
 
-	create_point(fdf, &p1, x, y);
+
 	if (x < fdf->map->width - 1)
 	{
+		create_point(fdf, &p1, x, y);
 		create_point(fdf, &p2, x + 1, y);
-		fdf_put_line_to_image(fdf, &p1, &p2);
+		if (p1.print && p2.print)
+			fdf_put_line_to_image(fdf, &p1, &p2);
 	}
 	if (y < fdf->map->height - 1)
 	{
+		create_point(fdf, &p1, x, y);
 		create_point(fdf, &p2, x, y + 1);
-		fdf_put_line_to_image(fdf, &p1, &p2);
+		if (p1.print && p2.print)
+			fdf_put_line_to_image(fdf, &p1, &p2);
 	}
 }
 
 void		fdf_put_line_to_image_2(t_fdf *fdf, float x, float y, int color)
 {
+	if ((int)x > fdf->image.w || (int)y > fdf->image.h || x < 0 || y < 0)
+		return;
 	if (color)
 		fdf_put_pixel_to_image(fdf, (int)x, (int)y, fdf->color1);
 	else
@@ -86,9 +105,7 @@ int					fdf_put_pixel_to_image(t_fdf *fdf, int x, int y, int color)
 
 	if (x > fdf->image.w || y > fdf->image.h || x < 0 || y < 0)
 	{
-//		ft_printf("")
 		ft_printf("error pixel on x = %d, y = %d, [%d,%d] \n", x, y, fdf->image.w, fdf->image.h);
-//		ft_printf("error pixel");
 		return 0;
 	}
 	dst = (unsigned int *)fdf->image.addr;
