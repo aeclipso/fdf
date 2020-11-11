@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 17:20:13 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/11 12:26:30 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:32:05 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,43 @@ void				init_map(t_map *map, char *arg)
 		j = -1;
 		while (++j < map->width)
 		{
-			ft_printf("%3d", map->map[i][j]);
+			ft_printf("%6d", map->map[i][j]);
 		}
 		ft_printf("\n");
 	}
 }
+
+static size_t				coef_fordel(size_t q)
+{
+	size_t			delim;
+
+	delim = 10;
+	while (q /= 10)
+		delim *= 10;
+	return (delim);
+}
+
+size_t				find_qf(t_fdf *fdf)
+{
+	int				max;
+	int				min;
+	int				i;
+	int				j;
+
+	min = 2147483647;
+	max = -2147483648;
+	i = -1;
+	while (++i < fdf->map->height)
+	{
+		j = -1;
+		while (++j < fdf->map->width)
+		{
+			if (fdf->map->map[i][j] < min)
+				min = fdf->map->map[i][j];
+			if (fdf->map->map[i][j] > max)
+				max = fdf->map->map[i][j];
+		}
+	}
+	return(corf_fordel((size_t)ft_abs(max - min)));
+}
+

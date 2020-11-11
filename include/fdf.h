@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:00:30 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/11 10:41:24 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:32:15 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct	s_fdf_system
 	float	z_r;
 	int		margin_x;
 	int		margin_y;
-
+	size_t	coef;
 }				t_fdf;
 
 
@@ -127,6 +127,7 @@ void	y_angle(float *x, float y, float *z, float angle);
 void	z_angle(float *x, float *y, float z, float angle);
 void	proj_hook(int keycode, t_fdf *fdf);
 void	*render_menu(t_fdf *fdf);
+size_t	find_qf(t_fdf *fdf);
 #endif 
 
 //sega 20-60, 10-70, нужно ограничение с отрицательной стороны тоже

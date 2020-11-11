@@ -6,7 +6,7 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 22:06:23 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/11 10:48:47 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:32:32 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void		create_point(t_fdf *fdf, t_point *point, int x, int y)
 {
 	point->x = x * fdf->image.section;
 	point->y = y * fdf->image.section;
-	point->z = fdf->map->map[y][x];
+	point->z = fdf->map->map[y][x] / find_qf(fdf) * 2;
 	point->color = (point->z) ? 1 : 0;
 	point->x -= (fdf->map->width * fdf->image.section) / 2;
 	point->y -= (fdf->map->height * fdf->image.section) / 2;
-	point->z *= fdf->image.section * fdf->image.top; //?
+	point->z *= fdf->image.section + fdf->image.top; //?
 	x_angle(point->x, &(point->y), &(point->z), fdf->x_r);
 	y_angle(&(point->x), point->y, &(point->z), fdf->y_r);
 	z_angle(&(point->x), &(point->y), point->z, fdf->z_r);
