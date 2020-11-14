@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kupsyloc <kupsyloc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 22:09:19 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/10 22:24:23 by kupsyloc         ###   ########.fr       */
+/*   Updated: 2020/11/11 21:27:44 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fdf.h"
+#include "fdf.h"
 
 void			init_display(t_fdf *fdf, char *title)
 {
@@ -27,7 +27,7 @@ void			init_display(t_fdf *fdf, char *title)
 	fdf->margin_y = 0;
 	fdf->image.w = fdf->w;
 	fdf->image.h = fdf->h;
-	fdf->image.top = 1;
+	fdf->image.top = 0.2f;
 	init_sect(fdf);
 }
 
@@ -38,7 +38,6 @@ void			init_image(t_fdf *fdf, int width, int height)
 										&fdf->image.bits_per_pixel,
 										&fdf->image.line_length,
 										&fdf->image.endian);
-
 }
 
 void			draw(t_fdf *fdf)
@@ -53,23 +52,6 @@ void			draw(t_fdf *fdf)
 		while (++x < fdf->map->width)
 			draw_line(fdf, x, y);
 	}
-}
-
-void			painter(t_fdf *fdf)
-{
-	static int	created;
-
-	if (created == 0)
-		created = 1;
-	else
-	{
-		mlx_destroy_image(fdf->mlx, fdf->image.img);
-		mlx_clear_window(fdf->mlx, fdf->window);
-	}
-	init_image(fdf, fdf->image.w, fdf->image.h);
-	draw(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->image.img, 0, 0);
-	render_menu(fdf);
 }
 
 int				close_window(t_fdf *fdf)

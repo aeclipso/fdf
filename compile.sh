@@ -1,1 +1,0 @@
-gcc -O3 -g -ffast-math -I include -I libft-printf/include -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -L libft-printf main.c init_map.c hooks.c render.c render_tools.c math_tools.c init_sect.c proj_hook.c render_tools2.c escape.c libft-printf/libft.a  -o fdf && ./fdf df_test.txt

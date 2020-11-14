@@ -5,70 +5,61 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/10/24 13:57:10 by aeclipso          #+#    #+#              #
-#    Updated: 2020/11/08 16:19:30 by aeclipso         ###   ########.fr        #
+#    Created: 2020/11/11 21:22:13 by aeclipso          #+#    #+#              #
+#    Updated: 2020/11/11 21:57:30 by aeclipso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=fdf
+NAME = fdf
 
-FLAGS=-Wall -Werror -Wextra  -O3 -ffast-math
-LIBRARIES = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -L$(LIBFT_D)
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g -O3
+
+SRC_DIR = ./src
+OBJ_DIR = ./obj
+
+INCLUDES = -I libft/include -I include 
+LIBS = -L libft -lft -lmlx -framework OpenGL -framework AppKit
+
+SRC = hooks init_map init_sect main math_tools render_tools render_tools2 render
+INC = include/fdf.h
+
+SRC_C = $(patsubst %, %.c, $(SRC))
 
 
-INCLUDES+= -I include
-INCLUDES+= -I $(LIBFT_D)/include
-# INCLUDES+= -I ./minilibx/
 
-LIBFT_D=libft-printf
-LIBFT = $(LIBFT_D)/libft.a 
+RED 	:= \033[31;1m
+GREEN 	:= \033[32;1m
+DBLUE 	:= \033[34m
+WHITE	:= \033[39;1m
+EOC		:= \033[00m
 
-MINILIBX_D=minilibx
-MINILIBX = $(MINILIBX_D)libmlx.a 
+OBJS = $(addprefix $(OBJ_DIR)/, $(patsubst %, %.o, $(SRC)))
 
-SRC=main.c\
-	init_map.c\
-	hooks.c\
-	render.c\
-	render_tools.c
-
-OBJ=$(SRC:.c=.o)
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(LIBFT)
-	@gcc $(FLAGS) $(INCLUDES) $(LIBRARIES) $(SRC) $(LIBFT) -o fdf
-	# @gcc $(FLAGS) -g $(LIBRARIES) $(INCLUDES) -o $(NAME) $(OBJ)
+$(OBJ_DIR):
+	@mkdir -vp obj
 
-libft.a :
-	@$(MAKE) --no-print-directory -C $(LIBFT_D) all
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile $(INC)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+	@printf "\n$(GREEN)compiled: $(WHITE) $< $(EOC)\n"
 
-# $(MINILIBX):
-# 	@$(MAKE) -sC $(MINILIBX_D)
-
-# $(OBJ): %.o: %.c
-# 		@gcc -g $(FLAGS) $(INCLUDES) -MD -o $@ -c $<
-
-# clean:
-# 	@rm -f $(OBJ)
-# 	@$(MAKE) --no-print-directory -C $(LIBFT_D) clean
-
-# fclean: clean
-# 	@rm -f $(NAME)
-# 	@rm -f $(FOLDER)$(NAME)
-# 	# @$(MAKE) --no-print-directory -C $(LIBFT_D) fclean
-
-# re: fclean all
+$(NAME): $(OBJ_DIR) $(OBJS)
+	@make -C libft
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@printf "\n$(GREEN)compiled: $(WHITE) $@ $(EOC)\n"
 
 clean:
-	@$(MAKE) -sC $(LIBFT_D) clean
-	@$(MAKE) -sC $(MINILIBX_D) clean
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_DIR)
+	@make clean -C libft/
+	@printf "\n$(RED)Deleted: $(WHITE) $(OBJ_DIR) $(EOC)\n"
 
 fclean: clean
-	@rm -f $(LIBFT)
 	@rm -f $(NAME)
-
-re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@make fclean -C libft/
+	@printf "\n$(RED)Deleted: $(WHITE) $(NAME) $(EOC)\n"
+	
+re: fclean all

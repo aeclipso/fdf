@@ -6,11 +6,11 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 21:51:26 by kupsyloc          #+#    #+#             */
-/*   Updated: 2020/11/11 17:41:19 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 21:27:30 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fdf.h"
+#include "fdf.h"
 
 void			proj_hook(int keycode, t_fdf *fdf)
 {
@@ -19,21 +19,18 @@ void			proj_hook(int keycode, t_fdf *fdf)
 		fdf->x_r = -3.834442f;
 		fdf->y_r = -2.534443f;
 		fdf->z_r = -2.614443f;
-		fdf->image.top = 50;
 	}
 	if (keycode == 19)
 	{
 		fdf->x_r = 0.0f;
 		fdf->y_r = 0.0f;
 		fdf->z_r = 0.0f;
-		fdf->image.top = 50;
 	}
 	if (keycode == 20)
 	{
 		fdf->x_r = 2.0f;
 		fdf->y_r = 1.0f;
 		fdf->z_r = 3.0f;
-		fdf->image.top = 150;
 	}
 }
 
@@ -66,59 +63,28 @@ static void		color_hook(int keycode, t_fdf *fdf)
 	}
 }
 
-//static void		change_size(int keycode, t_fdf *fdf)
-//{
-//	if (keycode == 27 && fdf->image.w > 51 && fdf->image.h > 51)
-//	{
-//		fdf->image.w *= 0.95;
-//		fdf->image.h *= 0.95;
-//	}
-//	else if (keycode == 27)
-//	{
-//		fdf->image.w = fdf->w / 32;
-//		fdf->image.h = fdf->h / 32;
-//	}
-//	else if (keycode == 24 && (fdf->image.w * fdf->image.h < 132710400))
-//	{
-//		fdf->image.w *= 1.05;
-//		fdf->image.h *= 1.05;
-//	}
-//	ft_printf("Inscrease to x = %d y = %d\n", fdf->image.w, fdf->image.h);
-//}
-
 static void		change_size(int keycode, t_fdf *fdf)
 {
-	if (keycode == 27 && fdf->image.section > -100)
+	if (keycode == 27)
 	{
-		fdf->image.section -= 10;
+		fdf->image.section--;
 	}
 	else if (keycode == 24)
 	{
-		fdf->image.section += 10;
+		fdf->image.section++;
 	}
-	ft_printf("[Change_size] fdf->image.section = %f\n", fdf->image.section);
 }
-
-//static void		change_top(int keycode, t_fdf *fdf)
-//{
-//	if (keycode == 30 && fdf->image.top < 2.0f) //смотреть во что превращается z при этом тоже
-//		fdf->image.top += 0.2f;
-//	else if (keycode == 33 && fdf->image.top > -2.1f)
-//		fdf->image.top -= 0.2f;
-//}
 
 static void		change_top(int keycode, t_fdf *fdf)
 {
-	if (keycode == 30 && fdf->image.top < 150) //смотреть во что превращается z при этом тоже
-		fdf->image.top += 1;
-	else if (keycode == 33 && fdf->image.top > -150)
-		fdf->image.top -= 1;
-	ft_printf("top = %d\n", fdf->image.top);
+	if (keycode == 30)
+		fdf->image.top += 0.5f;
+	else if (keycode == 33)
+		fdf->image.top -= 0.5f;
 }
 
 int				hooks_manager(int keycode, t_fdf *fdf)
 {
-	ft_printf("keycode = %d\n", keycode);
 	if (keycode == 53 || keycode == 256 || keycode == 259)
 		close_window(fdf);
 	fdf->margin_x = (keycode == 123) ? fdf->margin_x -= 10 : fdf->margin_x;

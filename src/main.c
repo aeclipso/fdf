@@ -6,15 +6,15 @@
 /*   By: aeclipso <aeclipso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 10:47:46 by aeclipso          #+#    #+#             */
-/*   Updated: 2020/11/11 17:36:25 by aeclipso         ###   ########.fr       */
+/*   Updated: 2020/11/11 21:27:37 by aeclipso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 #include <errno.h>
 
-void		usage(void)
+void			usage(void)
 {
 	ft_printf("Need more options\n");
 	return ;
@@ -47,7 +47,7 @@ int				core(char *arg)
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	if (argc != 2 && argv)
 		usage();
